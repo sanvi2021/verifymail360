@@ -6,7 +6,7 @@ User = get_user_model()
 class SignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "password", "username", "email" , "ip_address" ,"browser", "date_joined", "last_login")
+        fields = ("id", "password", "username", "email" , "ip_address" ,"browser", "created_at", "last_login")
 
 class SignupCreateSerializer(serializers.ModelSerializer):    
     class Meta:
@@ -22,4 +22,10 @@ class SignupCreateSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
-    
+
+
+class ActivateSerializer(serializers.ModelSerializer):
+    token = serializers.CharField(max_length= 700)
+
+    class Meta:
+        model = User
